@@ -1,0 +1,307 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>预处理&&const&&sizeof &#8211; ZHOU BLOG</title>
+<meta name="description" content="人总是在选择中迷惘">
+<meta name="keywords" content="程序基本功">
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="预处理&&const&&sizeof">
+<meta property="og:description" content="人总是在选择中迷惘">
+<meta property="og:url" content="http://s684373.github.io/%E9%A2%84%E5%A4%84%E7%90%86&&const&&sizeof-post/">
+<meta property="og:site_name" content="ZHOU BLOG">
+
+
+
+
+
+<link rel="canonical" href="http://s684373.github.io/%E9%A2%84%E5%A4%84%E7%90%86&&const&&sizeof-post/">
+<link href="http://s684373.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="ZHOU BLOG Feed">
+<link rel="author" href="https://google.com/+g684373?rel=author">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://s684373.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="http://s684373.github.io/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://s684373.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://s684373.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://s684373.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://s684373.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://s684373.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://s684373.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+</head>
+
+<body id="post" class="feature">
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="http://s684373.github.io/images/avatar.jpg" alt="Zhou JiaJun photo" class="author-photo">
+					<h4>Zhou JiaJun</h4>
+					<p>live a easy life</p>
+				</li>
+				<li>
+					<a href="mailto:zhou_jiajun@foxmail.com"><i class="fa fa-envelope"></i> Email</a>
+				</li>
+				
+				
+				<li>
+					<a href="https://google.com/+g684373"><i class="fa fa-google-plus"></i> Google+</a>
+				</li>
+				
+				
+				
+				
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="http://s684373.github.io/posts/">All Posts</a></li>
+				<li><a href="http://s684373.github.io/tags/">All Tags</a></li>
+			</ul>
+		</li>
+		
+	    
+	        
+	    
+	    <li><a href="http://s684373.github.io/theme-setup/" >Theme Setup</a></li>
+	  
+	    
+	        
+	        
+	    <li><a href="http://mademistakes.com" target="_blank">External Link</a></li>
+	  
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+<div class="entry-header">
+  <div class="image-credit">Image source: <a href="http://www.dargadgetz.com/ios-7-abstract-wallpaper-pack-for-iphone-5-and-ipod-touch-retina/">dargadgetz</a></div><!-- /.image-credit -->
+  <div class="entry-image">
+    <img src="http://s684373.github.io/images/abstract-3.jpg" alt="预处理&&const&&sizeof">
+  </div><!-- /.entry-image -->
+</div><!-- /.entry-header -->
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="http://s684373.github.io/%E9%A2%84%E5%A4%84%E7%90%86&&const&&sizeof-post/" rel="bookmark" title="预处理&&const&&sizeof">预处理&&const&&sizeof</a></h1>
+        
+        <h2>March 14, 2015</h2>
+        
+        <p class="entry-reading-time">
+          <i class="fa fa-clock-o"></i>
+          
+          Reading time ~1 minute
+        </p><!-- /.entry-reading-time -->
+        
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <h1 id="constsizeof">分享一下预处理&amp;&amp;const&amp;&amp;sizeof里一些小技巧</h1>
+
+<h2 id="define">define的用法</h2>
+<p><strong>1.用define声明一月有多少秒</strong></p>
+
+<p>一开始很想这么写，感觉就是声明个常量。</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#define SECONDS_JANUARY 2678400</span></code></pre></div>
+
+<p>而下面的写法就明显好的多。</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#define SECONDS_JANUARY 60*60*24*31</span></code></pre></div>
+
+<p>这样的宏可以让计算表达式表现出程序员的意图和计算的方式。</p>
+
+<p><strong>2.用define声明标准的宏MIN</strong></p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#define MIN(A,B) ((A)&lt;=(B))?(A):(B)</span></code></pre></div>
+
+<p>这里其实主要就是考察一下三重条件操作符，记得一定要括括号,这最好变成习惯，不然会引发如下错误。</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#define MUL(A,B) A*B</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">MUL</span><span class="p">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span> <span class="c1">//希望的是(3+5)*8,最后得到3+5*8</span>
+<span class="p">}</span></code></pre></div>
+
+<h2 id="const">const的用法</h2>
+<p><strong>四个const区分</strong></p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span> <span class="c1">//case 1</span>
+<span class="kt">int</span> <span class="k">const</span><span class="o">*</span> <span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span> <span class="c1">//case 2</span>
+<span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span> <span class="c1">//case 3</span>
+<span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span><span class="c1">//case 4</span></code></pre></div>
+
+<p>首先case 1 和 case 2是完全等价的。
+如果const在星号左侧，const修饰的就是所指向的变量,如果const在星号右侧，修饰的就是指针本身。
+所以如果是case1和case2的话，我们就不能修改指向的变量.</p>
+
+<p>所以在case 1,case 2 下面的语句都是违法的.</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="mi">600</span><span class="p">;</span><span class="c1">//不能修改</span></code></pre></div>
+
+<p>但如果要修改指针a指向的值得，以下语句可以代替达到这种效果。</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span><span class="c1">//方法1 修改指向的内容</span>
+<span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+<span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">;</span> <span class="c1">//方法2 指向新的内容</span></code></pre></div>
+
+<p>那如果是case3的话，也就是const在星号的右侧，说明指针本身是一个常亮。
+那么就不能对指针本身做任何操作。例如以下的行为。</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">50</span> <span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+<span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">a</span><span class="p">;</span><span class="c1">//错误 必须初始化，不然就永远指向未知。</span>
+<span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span> <span class="c1">//正确，初始化</span>
+<span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="mi">500</span> <span class="p">;</span> <span class="c1">//正确，可以修改</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="o">++</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="p">;</span><span class="c1">//错误，不能对a做指针操作</span></code></pre></div>
+
+<p>而case 4也很明显就是既不能修改值，也不能修改指针。</p>
+
+<p><strong>为什么要用const成员函数呢？</strong></p>
+
+<p>因为一些成员函数是不需要改变类中的数据成员的，它们是只读函数。所以如果加上const标示可以提高程序的可读性，也可以防止这些函数企图修改数据成员的值，让编译器报错。</p>
+
+<p>让我们来看看以下两个const函数写法:</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">int</span> <span class="n">Point</span><span class="o">::</span><span class="n">GETY</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="n">yVAL</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//这个意思是const的成员函数，即函数不能修改数据成员。</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">Point</span><span class="o">::</span><span class="n">GETY</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="n">yVAL</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//说明返回的值是一个const int.</span></code></pre></div>
+
+<p><strong>那么问题来了，#define和const 都能修饰常量，哪种更好？</strong></p>
+
+<ul>
+  <li>const常量有数据类型，而define没有，编译器可以对前者做类型检查，而后者只是字符替换，所以可能会在替换中产生未知的bug(<a href="http://zh.wikipedia.org/wiki/%E8%BE%B9%E9%99%85%E6%95%88%E7%94%A8"><strong>边际效应</strong></a>)</li>
+  <li>有些集成化的调试工具会调试const常量，却无法调试宏</li>
+</ul>
+
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="http://s684373.github.io/tags/#程序基本功" title="Pages tagged 程序基本功" class="tag">程序基本功</a></span>
+        <span><a href="http://s684373.github.io/%E9%A2%84%E5%A4%84%E7%90%86&&const&&sizeof-post/" rel="bookmark" title="预处理&&const&&sizeof">预处理&&const&&sizeof</a> was published on <span class="entry-date date published updated"><time datetime="2015-03-14T00:00:00-04:00">March 14, 2015</time></span></span>
+        (revised: <span class="entry-date date modified"><time datetime="2015-03-16">03/16/2015</time></span>)
+        <span class="author vcard"><span class="fn"><a href="http://s684373.github.io/about/" title="About Zhou JiaJun">Zhou JiaJun</a></span></span>
+        <div class="social-share">
+  <ul class="socialcount socialcount-small inline-list">
+    <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http://s684373.github.io/%E9%A2%84%E5%A4%84%E7%90%86&&const&&sizeof-post/" title="Share on Facebook"><span class="count"><i class="fa fa-facebook-square"></i> Like</span></a></li>
+    <li class="twitter"><a href="https://twitter.com/intent/tweet?text=http://s684373.github.io/%E9%A2%84%E5%A4%84%E7%90%86&&const&&sizeof-post/" title="Share on Twitter"><span class="count"><i class="fa fa-twitter-square"></i> Tweet</span></a></li>
+    <li class="googleplus"><a href="https://plus.google.com/share?url=http://s684373.github.io/%E9%A2%84%E5%A4%84%E7%90%86&&const&&sizeof-post/" title="Share on Google Plus"><span class="count"><i class="fa fa-google-plus-square"></i> +1</span></a></li>
+  </ul>
+</div><!-- /.social-share -->
+      </footer>
+    </div><!-- /.entry-content -->
+    <section>
+     <!-- 多说评论框 start -->
+   <div class="ds-thread" data-thread-key=/预处理&&const&&sizeof-post data-title=预处理&&const&&sizeof data-url="s684373.github.io/%E9%A2%84%E5%A4%84%E7%90%86&&const&&sizeof-post/" style="width:800px;margin:auto"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"s684373"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+<!-- 多说公共JS代码 end -->
+
+  </article>
+</div><!-- /#main -->
+  </section>
+      <div class="read-more">
+  
+    <div class="read-more-header">
+      <a href="http://s684373.github.io/2015-post/" class="read-more-btn">Read More</a>
+    </div><!-- /.read-more-header -->
+    <div class="read-more-content">
+      <h3><a href="http://s684373.github.io/2015-post/" title="2015">2015</a></h3>
+      <p>人总是在选择中迷惘 <a href="http://s684373.github.io/2015-post/">Continue reading</a></p>
+    </div><!-- /.read-more-content -->
+  
+  <div class="read-more-list">
+    
+      <div class="list-item">
+        <h4><a href="http://s684373.github.io/sample-link-post/" title="Sample Link Post">Sample Link Post</a></h4>
+        <span>Published on August 12, 2013</span>
+      </div><!-- /.list-item -->
+    
+      <div class="list-item">
+        <h4><a href="http://s684373.github.io/video-post/" title="A Post with a Video">A Post with a Video</a></h4>
+        <span>Published on June 25, 2013</span>
+      </div><!-- /.list-item -->
+    
+  </div><!-- /.read-more-list -->
+</div><!-- /.read-more -->
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2015 Zhou JiaJun. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/hpstr/" rel="notfollow">HPSTR Theme</a>.</span>
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://s684373.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://s684373.github.io/assets/js/scripts.min.js"></script>
+
+
+
+	        
+
+</body>
+</html>

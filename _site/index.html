@@ -133,6 +133,114 @@
 <article class="hentry">
   <header>
     <div class="entry-meta">
+      <span class="entry-date date published updated"><time datetime="2015-03-14T00:00:00-04:00"><a href="http://s684373.github.io/%E9%A2%84%E5%A4%84%E7%90%86&&const&&sizeof-post/">March 14, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="http://s684373.github.io/about/" title="About Zhou JiaJun">Zhou JiaJun</a></span></span>
+      
+      <span class="entry-reading-time pull-right">
+        <i class="fa fa-clock-o"></i>
+        
+        Reading time ~1 minute
+      </span><!-- /.entry-reading-time -->
+      
+    </div><!-- /.entry-meta -->
+    
+      <h1 class="entry-title"><a href="http://s684373.github.io/%E9%A2%84%E5%A4%84%E7%90%86&&const&&sizeof-post/" rel="bookmark" title="预处理&&const&&sizeof" itemprop="url">预处理&&const&&sizeof</a></h1>
+    
+  </header>
+  <div class="entry-content">
+    <h1 id="constsizeof">分享一下预处理&amp;&amp;const&amp;&amp;sizeof里一些小技巧</h1>
+
+<h2 id="define">define的用法</h2>
+<p><strong>1.用define声明一月有多少秒</strong></p>
+
+<p>一开始很想这么写，感觉就是声明个常量。</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#define SECONDS_JANUARY 2678400</span></code></pre></div>
+
+<p>而下面的写法就明显好的多。</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#define SECONDS_JANUARY 60*60*24*31</span></code></pre></div>
+
+<p>这样的宏可以让计算表达式表现出程序员的意图和计算的方式。</p>
+
+<p><strong>2.用define声明标准的宏MIN</strong></p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#define MIN(A,B) ((A)&lt;=(B))?(A):(B)</span></code></pre></div>
+
+<p>这里其实主要就是考察一下三重条件操作符，记得一定要括括号,这最好变成习惯，不然会引发如下错误。</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#define MUL(A,B) A*B</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">MUL</span><span class="p">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span> <span class="c1">//希望的是(3+5)*8,最后得到3+5*8</span>
+<span class="p">}</span></code></pre></div>
+
+<h2 id="const">const的用法</h2>
+<p><strong>四个const区分</strong></p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span> <span class="c1">//case 1</span>
+<span class="kt">int</span> <span class="k">const</span><span class="o">*</span> <span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span> <span class="c1">//case 2</span>
+<span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span> <span class="c1">//case 3</span>
+<span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span><span class="c1">//case 4</span></code></pre></div>
+
+<p>首先case 1 和 case 2是完全等价的。
+如果const在星号左侧，const修饰的就是所指向的变量,如果const在星号右侧，修饰的就是指针本身。
+所以如果是case1和case2的话，我们就不能修改指向的变量.</p>
+
+<p>所以在case 1,case 2 下面的语句都是违法的.</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="mi">600</span><span class="p">;</span><span class="c1">//不能修改</span></code></pre></div>
+
+<p>但如果要修改指针a指向的值得，以下语句可以代替达到这种效果。</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span><span class="c1">//方法1 修改指向的内容</span>
+<span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+<span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">;</span> <span class="c1">//方法2 指向新的内容</span></code></pre></div>
+
+<p>那如果是case3的话，也就是const在星号的右侧，说明指针本身是一个常亮。
+那么就不能对指针本身做任何操作。例如以下的行为。</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">50</span> <span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+<span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">a</span><span class="p">;</span><span class="c1">//错误 必须初始化，不然就永远指向未知。</span>
+<span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span> <span class="c1">//正确，初始化</span>
+<span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="mi">500</span> <span class="p">;</span> <span class="c1">//正确，可以修改</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="o">++</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="p">;</span><span class="c1">//错误，不能对a做指针操作</span></code></pre></div>
+
+<p>而case 4也很明显就是既不能修改值，也不能修改指针。</p>
+
+<p><strong>为什么要用const成员函数呢？</strong></p>
+
+<p>因为一些成员函数是不需要改变类中的数据成员的，它们是只读函数。所以如果加上const标示可以提高程序的可读性，也可以防止这些函数企图修改数据成员的值，让编译器报错。</p>
+
+<p>让我们来看看以下两个const函数写法:</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">int</span> <span class="n">Point</span><span class="o">::</span><span class="n">GETY</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="n">yVAL</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//这个意思是const的成员函数，即函数不能修改数据成员。</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">Point</span><span class="o">::</span><span class="n">GETY</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="n">yVAL</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//说明返回的值是一个const int.</span></code></pre></div>
+
+<p><strong>那么问题来了，#define和const 都能修饰常量，哪种更好？</strong></p>
+
+<ul>
+  <li>const常量有数据类型，而define没有，编译器可以对前者做类型检查，而后者只是字符替换，所以可能会在替换中产生未知的bug(<a href="http://zh.wikipedia.org/wiki/%E8%BE%B9%E9%99%85%E6%95%88%E7%94%A8"><strong>边际效应</strong></a>)</li>
+  <li>有些集成化的调试工具会调试const常量，却无法调试宏</li>
+</ul>
+
+
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
+    <div class="entry-meta">
       <span class="entry-date date published updated"><time datetime="2015-02-06T00:00:00-05:00"><a href="http://s684373.github.io/2015-post/">February 06, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="http://s684373.github.io/about/" title="About Zhou JiaJun">Zhou JiaJun</a></span></span>
       
       <span class="entry-reading-time pull-right">
@@ -287,80 +395,6 @@
 <p>Occupy et selvage squid, pug brunch blog nesciunt hashtag mumblecore skateboard yr kogi. Ugh small batch swag four loko. Fap post-ironic qui tote bag farm-to-table american apparel scenester keffiyeh vero, swag non pour-over gentrify authentic pitchfork. Schlitz scenester lo-fi voluptate, tote bag irony bicycle rights pariatur vero Vice freegan wayfarers exercitation nisi shoreditch. Chambray tofu vero sed. Street art swag literally leggings, Cosby sweater mixtape PBR lomo Banksy non in pitchfork ennui McSweeney’s selfies. Odd Future Banksy non authentic.</p>
 
 <p>Aliquip enim artisan dolor post-ironic. Pug tote bag Marfa, deserunt pour-over Portland wolf eu odio intelligentsia american apparel ugh ea. Sunt viral et, 3 wolf moon gastropub pug id. Id fashion axe est typewriter, mlkshk Portland art party aute brunch. Sint pork belly Cosby sweater, deep v mumblecore kitsch american apparel. Try-hard direct trade tumblr sint skateboard. Adipisicing bitters excepteur biodiesel, pickled gastropub aute veniam.</p>
-
-  </div><!-- /.entry-content -->
-</article><!-- /.hentry -->
-
-<article class="hentry">
-  <header>
-    <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2013-05-22T00:00:00-04:00"><a href="http://s684373.github.io/sample-post-images/">May 22, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="http://s684373.github.io/about/" title="About Zhou JiaJun">Zhou JiaJun</a></span></span>
-      
-      <span class="entry-reading-time pull-right">
-        <i class="fa fa-clock-o"></i>
-        
-        Reading time ~1 minute
-      </span><!-- /.entry-reading-time -->
-      
-    </div><!-- /.entry-meta -->
-    
-      <h1 class="entry-title"><a href="http://s684373.github.io/sample-post-images/" rel="bookmark" title="A Post with Images" itemprop="url">A Post with Images</a></h1>
-    
-  </header>
-  <div class="entry-content">
-    <p>Here are some examples of what a post with images might look like. If you want to display two or three images next to each other responsively use <code>figure</code> with the appropriate <code>class</code>. Each instance of <code>figure</code> is auto-numbered and displayed in the caption.</p>
-
-<h2 id="figures-for-images-or-video">Figures (for images or video)</h2>
-
-<h3 id="one-up">One Up</h3>
-
-<figure>
-	<a href="http://farm9.staticflickr.com/8426/7758832526_cc8f681e48_b.jpg"><img src="http://farm9.staticflickr.com/8426/7758832526_cc8f681e48_c.jpg" alt="" /></a>
-	<figcaption><a href="http://www.flickr.com/photos/80901381@N04/7758832526/" title="Morning Fog Emerging From Trees by A Guy Taking Pictures, on Flickr">Morning Fog Emerging From Trees by A Guy Taking Pictures, on Flickr</a>.</figcaption>
-</figure>
-
-<h3 id="two-up">Two Up</h3>
-
-<p>Apply the <code>half</code> class like so to display two images side by side that share the same caption.</p>
-
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;figure</span> <span class="na">class=</span><span class="s">&quot;half&quot;</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;/images/image-filename-1.jpg&quot;</span> <span class="na">alt=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;/images/image-filename-2.jpg&quot;</span> <span class="na">alt=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;figcaption&gt;</span>Caption describing these two images.<span class="nt">&lt;/figcaption&gt;</span>
-<span class="nt">&lt;/figure&gt;</span></code></pre></div>
-
-<p>And you’ll get something that looks like this:</p>
-
-<figure class="half">
-	<a href="http://placehold.it/1200x600.jpg"><img src="http://placehold.it/600x300.jpg" alt="" /></a>
-	<a href="http://placehold.it/1200x600.jpg"><img src="http://placehold.it/600x300.jpg" alt="" /></a>
-	<img src="http://placehold.it/600x300.jpg" alt="" />
-	<img src="http://placehold.it/600x300.jpg" alt="" />
-	<figcaption>Two images.</figcaption>
-</figure>
-
-<h3 id="three-up">Three Up</h3>
-
-<p>Apply the <code>third</code> class like so to display three images side by side that share the same caption.</p>
-
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;figure</span> <span class="na">class=</span><span class="s">&quot;third&quot;</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://placehold.it/1200x600.jpg&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://placehold.it/600x300.jpg&quot;</span> <span class="na">alt=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-	<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://placehold.it/1200x600.jpg&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://placehold.it/600x300.jpg&quot;</span> <span class="na">alt=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-	<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://placehold.it/1200x600.jpg&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://placehold.it/600x300.jpg&quot;</span> <span class="na">alt=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-	<span class="nt">&lt;figcaption&gt;</span>Caption describing these three images.<span class="nt">&lt;/figcaption&gt;</span>
-<span class="nt">&lt;/figure&gt;</span></code></pre></div>
-
-<p>And you’ll get something that looks like this:</p>
-
-<figure class="third">
-	<a href="http://placehold.it/1200x600.jpg"><img src="http://placehold.it/600x300.jpg" alt="" /></a>
-	<a href="http://placehold.it/1200x600.jpg"><img src="http://placehold.it/600x300.jpg" alt="" /></a>
-	<a href="http://placehold.it/1200x600.jpg"><img src="http://placehold.it/600x300.jpg" alt="" /></a>
-	<a href="http://placehold.it/1200x600.jpg"><img src="http://placehold.it/600x300.jpg" alt="" /></a>
-	<a href="http://placehold.it/1200x600.jpg"><img src="http://placehold.it/600x300.jpg" alt="" /></a>
-	<a href="http://placehold.it/1200x600.jpg"><img src="http://placehold.it/600x300.jpg" alt="" /></a>
-	<figcaption>Three images.</figcaption>
-</figure>
 
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
