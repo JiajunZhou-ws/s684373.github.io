@@ -1,0 +1,307 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>进程间通信的方法 &#8211; ZHOU BLOG</title>
+<meta name="description" content="人总是在选择中迷惘">
+<meta name="keywords" content="程序基本功">
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程间通信的方法">
+<meta property="og:description" content="人总是在选择中迷惘">
+<meta property="og:url" content="http://s684373.github.io/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E6%B3%95/">
+<meta property="og:site_name" content="ZHOU BLOG">
+
+
+
+
+
+<link rel="canonical" href="http://s684373.github.io/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E6%B3%95/">
+<link href="http://s684373.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="ZHOU BLOG Feed">
+<link rel="author" href="https://google.com/+g684373?rel=author">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://s684373.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="http://s684373.github.io/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://s684373.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://s684373.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://s684373.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://s684373.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://s684373.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://s684373.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+</head>
+
+<body id="post" class="feature">
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="http://s684373.github.io/images/avatar.jpg" alt="Zhou JiaJun photo" class="author-photo">
+					<h4>Zhou JiaJun</h4>
+					<p>live a easy life</p>
+				</li>
+				<li>
+					<a href="mailto:zhou_jiajun@foxmail.com"><i class="fa fa-envelope"></i> Email</a>
+				</li>
+				
+				
+				<li>
+					<a href="https://google.com/+g684373"><i class="fa fa-google-plus"></i> Google+</a>
+				</li>
+				
+				
+				
+				
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="http://s684373.github.io/posts/">All Posts</a></li>
+				<li><a href="http://s684373.github.io/tags/">All Tags</a></li>
+			</ul>
+		</li>
+		
+	    
+	        
+	    
+	    <li><a href="http://s684373.github.io/theme-setup/" >Theme Setup</a></li>
+	  
+	    
+	        
+	        
+	    <li><a href="http://mademistakes.com" target="_blank">External Link</a></li>
+	  
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+<div class="entry-header">
+  <div class="image-credit">Image source: <a href="http://www.dargadgetz.com/ios-7-abstract-wallpaper-pack-for-iphone-5-and-ipod-touch-retina/">dargadgetz</a></div><!-- /.image-credit -->
+  <div class="entry-image">
+    <img src="http://s684373.github.io/images/abstract-3.jpg" alt="进程间通信的方法">
+  </div><!-- /.entry-image -->
+</div><!-- /.entry-header -->
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="http://s684373.github.io/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E6%B3%95/" rel="bookmark" title="进程间通信的方法">进程间通信的方法</a></h1>
+        
+        <h2>March 15, 2015</h2>
+        
+        <p class="entry-reading-time">
+          <i class="fa fa-clock-o"></i>
+          
+          Reading time ~1 minute
+        </p><!-- /.entry-reading-time -->
+        
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <h2 id="section">一、管道</h2>
+
+<p>管道是进程间通信中最古老的方式，它包括 无名管道 和 有名管道两种，前者用于父进程和子进程间的通信，后者用于运行于同一台机器上的任意两个进程间的通信。
+无名管道由pipe()函数创建。</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#include &lt;stdio.h&gt; </span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+ 
+<span class="cp">#define INPUT 0</span>
+<span class="cp">#define OUTPUT 1</span>
+ 
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">files</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="kt">pid_t</span> <span class="n">pid</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">returned_count</span><span class="p">;</span>
+    
+    <span class="c1">//创建无名管道</span>
+    <span class="n">pipe</span><span class="p">(</span><span class="n">files</span><span class="p">);</span>
+ 
+    <span class="c1">//创建子进程</span>
+    
+    <span class="k">if</span><span class="p">((</span><span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">())</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
+    <span class="p">{</span> 
+        <span class="n">perror</span><span class="p">(</span><span class="s">&quot;fork() error&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> 
+    <span class="p">}</span> 
+ 
+    <span class="c1">//执行子进程</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span> 
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;in child process....</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+ 
+        <span class="c1">//子进程向父进程写数据，关闭管道的读端</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="n">INPUT</span><span class="p">]);</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="n">OUTPUT</span><span class="p">],</span><span class="s">&quot;test data&quot;</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="s">&quot;test data&quot;</span><span class="p">));</span>
+     
+        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span> 
+    <span class="k">else</span>
+    <span class="p">{</span> 
+        <span class="c1">//执行父进程</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;in the parent process...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="c1">//父进程从管道中读取子进程写的数据，关闭管道的写端</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="n">OUTPUT</span><span class="p">]);</span>
+ 
+        <span class="n">returned_count</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+        <span class="n">buf</span><span class="p">[</span><span class="n">returned_count</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d bytes of data receiced from spawned process:%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">returned_count</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+    <span class="p">}</span> 
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2 id="section-1">二、消息队列</h2>
+<p>消息队列用于运行于同一台机器上的进程间通信，它和管道很相似，是一个在系统内核中用来保存消息的队列，它在系统内核中是以消息链表的形式出现。消息链表中节点的结构用msg声明。</p>
+
+<p>事实上，它是一种正<strong>逐步被淘汰</strong>的通信方式，我们可以用流管道或者套接口的方式来取代它。所以，我们对此方法也不再解释，也建议读者忽略这种方式。</p>
+
+<h2 id="section-2">三、共享内存</h2>
+
+<p>共享内存是运行在同一台机器上的进程间<strong>通信最快</strong>的方式，因为数据不需要在不同的进程间复制。通常由一个进程创建一块共享内存区，其余进程对这块内存区进行读写。得到共享内存有两种方式：映射/dev/mem设备和内存映像文件。前一种方式不给系统带来额外的开销，但在现实中并不常用，因为它控制存取的将是实际的物理内存，在Linux系统下，这只有通过限制Linux系统存取的内存才可以做到，这当然不太实际。常用的方式是通过shmXXX函数族来实现利 用共享内存进行存储的。
+使用共享内存时要掌握的唯一诀窍是多个进程之间对一定存储区d同步访问。若服务器进程正在将数据放入共享内存，则在它做完这一操作之前，客户进程不应当去读取这些数据。
+通常，信号量是用来实现对共享内存访问的同步（记录锁也可以用于这种场合）。
+使用共享存储来实现进程间通信的注意点是<strong>对数据存取的同步</strong>，必须确保当一个进程去读取数据时，它所想要的数据已经写好了。通常，信号量被要来实现对共享存 储数据存取的同步，另外，可以通过使用shmctl函数设置共享存储内存的某些标志位如SHM_LOCK、SHM_UNLOCK等来实现。</p>
+
+<h2 id="section-3">四、信号</h2>
+<p>信号是比较复杂的通信方式，用于通知接受进程有某种事件发生，除了用于进程间通信外，进程还可以发送信号给进程本身；linux除了支持Unix早期信号语义函数sigal外，还支持语义符合Posix.1标准的信号函数sigaction（实际上，该函数是基于BSD的，BSD为了实现可靠信号机制，又能够统一对外接口，用sigaction函数重新实现了signal函数）。 </p>
+
+<h2 id="section-4">五、信号量</h2>
+<p>信号量又称为信号灯，它是用来协调不同进程间的数据对象的，而最主要的应用是前一节的共享内存方式的进程间通信。本质上，信号量是一个计数器，它用来记录对某个资源（如共享内存）的存取状况。一般说来，为了获得共享资源，进程需要执行下列操作： 
+　　 （1） 测试控制该资源的信号量。 
+　　 （2） 若此信号量的值为正，则允许进行使用该资源。进程将信号量减1。 
+　　 （3）若此信号量为0，则该资源目前不可用，进程进入睡眠状态，直至信号量值大于0，进程被唤醒，转入步骤（1）。 
+　　 （4）当进程不再使用一个信号量控制的资源时，信号量值加1。如果此时有进程正在睡眠等待此信号量，则唤醒此进程。 
+　  维护信号量状态的是Linux内核操作系统而不是用户进程。我们可以从头文件/usr/src/linux/include　/linux　/sem.h 中看到内核用来维护信号量状态的各个结构的定义。信号量是一个数据集合，用户可以单独使用这一集合的每个元素。要调用的第一个函数是semget，用以获得一个信号量ID。 </p>
+
+<h2 id="section-5">六、套接口</h2>
+<p>套接口（socket）编程是实现Linux系统和其他大多数操作系统中进程间通信的主要方式之一。我们熟悉的WWW服务、FTP服务等都是基于套接口编程来实现的。除了异地的计算机进程间外，套接口同样适用于本地同一台计算机内部的进程间通信。
+关于这部分，可以参照《设计自己的网络蚂蚁》，链接为：。那里由常用的几个套接口函数的介绍和示例程序。这一部分或许是Linux进程 间通信编程中最须关注和最吸引人的一部分，毕竟，Internet 正在我们身边以不可思议的速度发展着，如果一个程序员在设计编写他下一个程序的时候，根本没有考虑到网络，考虑到Internet，那么，可以说，他的设计很难成功。</p>
+
+<p>参考资料：</p>
+
+<p><a href="http://blog.chinaunix.net/uid-26548237-id-3388615.html"><strong>1.Linux下进程间通信</strong></a></p>
+
+<p><a href="http://www.ibm.com/developerworks/cn/linux/l-ipc/"><strong>2.深刻理解Linux进程间通信（IPC)</strong></a></p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="http://s684373.github.io/tags/#程序基本功" title="Pages tagged 程序基本功" class="tag">程序基本功</a></span>
+        <span><a href="http://s684373.github.io/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E6%B3%95/" rel="bookmark" title="进程间通信的方法">进程间通信的方法</a> was published on <span class="entry-date date published updated"><time datetime="2015-03-15T00:00:00-04:00">March 15, 2015</time></span></span>
+        (revised: <span class="entry-date date modified"><time datetime="2015-03-15">03/15/2015</time></span>)
+        <span class="author vcard"><span class="fn"><a href="http://s684373.github.io/about/" title="About Zhou JiaJun">Zhou JiaJun</a></span></span>
+        <div class="social-share">
+  <ul class="socialcount socialcount-small inline-list">
+    <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http://s684373.github.io/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E6%B3%95/" title="Share on Facebook"><span class="count"><i class="fa fa-facebook-square"></i> Like</span></a></li>
+    <li class="twitter"><a href="https://twitter.com/intent/tweet?text=http://s684373.github.io/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E6%B3%95/" title="Share on Twitter"><span class="count"><i class="fa fa-twitter-square"></i> Tweet</span></a></li>
+    <li class="googleplus"><a href="https://plus.google.com/share?url=http://s684373.github.io/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E6%B3%95/" title="Share on Google Plus"><span class="count"><i class="fa fa-google-plus-square"></i> +1</span></a></li>
+  </ul>
+</div><!-- /.social-share -->
+      </footer>
+    </div><!-- /.entry-content -->
+    <section>
+     <!-- 多说评论框 start -->
+   <div class="ds-thread" data-thread-key=/进程间通信的方法 data-title=进程间通信的方法 data-url="s684373.github.io/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E6%B3%95/" style="width:800px;margin:auto"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"s684373"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+<!-- 多说公共JS代码 end -->
+
+  </article>
+</div><!-- /#main -->
+  </section>
+      <div class="read-more">
+  
+    <div class="read-more-header">
+      <a href="http://s684373.github.io/%E9%A2%84%E5%A4%84%E7%90%86&&const&&sizeof-post/" class="read-more-btn">Read More</a>
+    </div><!-- /.read-more-header -->
+    <div class="read-more-content">
+      <h3><a href="http://s684373.github.io/%E9%A2%84%E5%A4%84%E7%90%86&&const&&sizeof-post/" title="预处理&&const&&sizeof">预处理&&const&&sizeof</a></h3>
+      <p>人总是在选择中迷惘 <a href="http://s684373.github.io/%E9%A2%84%E5%A4%84%E7%90%86&&const&&sizeof-post/">Continue reading</a></p>
+    </div><!-- /.read-more-content -->
+  
+  <div class="read-more-list">
+    
+      <div class="list-item">
+        <h4><a href="http://s684373.github.io/2015-post/" title="2015">2015</a></h4>
+        <span>Published on February 06, 2015</span>
+      </div><!-- /.list-item -->
+    
+      <div class="list-item">
+        <h4><a href="http://s684373.github.io/sample-link-post/" title="Sample Link Post">Sample Link Post</a></h4>
+        <span>Published on August 12, 2013</span>
+      </div><!-- /.list-item -->
+    
+  </div><!-- /.read-more-list -->
+</div><!-- /.read-more -->
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2015 Zhou JiaJun. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/hpstr/" rel="notfollow">HPSTR Theme</a>.</span>
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://s684373.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://s684373.github.io/assets/js/scripts.min.js"></script>
+
+
+
+	        
+
+</body>
+</html>
